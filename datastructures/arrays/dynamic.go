@@ -18,13 +18,10 @@ func (d *DynamicArray[T]) Append(v T) {
 		for i := 0; i < d.l; i++ {
 			arr2[i] = d.arr[i]
 		}
-		arr2[d.l] = v
 		d.arr = arr2
-		d.l++
-	} else {
-		d.arr[d.l] = v
-		d.l++
 	}
+	d.arr[d.l] = v
+	d.l++
 }
 
 func (d *DynamicArray[T]) Clear() {
