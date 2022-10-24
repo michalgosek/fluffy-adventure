@@ -1,11 +1,13 @@
-package linked_list
+package linkedlist
 
-type Node[T any] struct {
+import "golang.org/x/exp/constraints"
+
+type Node[T constraints.Ordered] struct {
 	Value T
 	Next  *Node[T]
 }
 
-type SingleLinkedList[T any] struct {
+type SingleLinkedList[T constraints.Ordered] struct {
 	head *Node[T]
 	tail *Node[T]
 	size int
@@ -34,12 +36,31 @@ func (s *SingleLinkedList[T]) AddFirst(v T) {
 func (s *SingleLinkedList[T]) AddLast(v T) {
 	node := Node[T]{Value: v}
 	if s.IsEmpty() {
-		s.head = &node
-	} else {
-		s.tail.Next = &node
-		s.tail = &node
+		s.AddFirst(v)
+		return
 	}
+
+	s.tail.Next = &node
+	s.tail = &node
 	s.size++
+}
+
+func (s *SingleLinkedList[T]) Contains(v T) bool {
+	return s.IndexOf(v) != -1
+}
+
+func (s *SingleLinkedList[T]) IndexOf(v T) int {
+	if s.size == 0 {
+		panic("empty list")
+	}
+	trav := s.head
+	for i := 0; trav != nil; i++ {
+		if trav.Value == v {
+			return i
+		}
+		trav = trav.Next
+	}
+	return -1
 }
 
 func (s *SingleLinkedList[T]) Clear() bool {
@@ -93,13 +114,12 @@ func (s *SingleLinkedList[T]) AddAt(idx int, v T) {
 	s.size++
 }
 
-func (s *SingleLinkedList[T]) RemoveAt(idx int) {
+func (s *SingleLinkedList[T]) RemoveAt(idx int) T {
 	if idx < 0 || idx >= s.size {
 		panic("illegal index")
 	}
 	if idx == 0 {
-		s.RemoveFirst()
-		return
+		return s.RemoveFirst()
 	}
 
 	trav := s.head
@@ -108,24 +128,32 @@ func (s *SingleLinkedList[T]) RemoveAt(idx int) {
 	}
 
 	if idx == s.size-1 {
-		s.tail = trav
-		trav.Next = nil
-		s.size--
-		return
+		v := trav.Next.Value
+		s.setNewTail(trav)
+		return v
 	}
 
 	trav.Next = trav.Next.Next
 	s.size--
+	return trav.Value
 }
 
-func (s *SingleLinkedList[T]) RemoveFirst() {
-	newHead := s.head.Next
-	s.head = newHead
+func (s *SingleLinkedList[T]) setNewTail(prev *Node[T]) {
+	prev.Next = nil
+	s.tail = prev
 	s.size--
 }
 
-func (s *SingleLinkedList[T]) RemoveLast() {
-	s.RemoveAt(s.size - 1)
+func (s *SingleLinkedList[T]) RemoveFirst() T {
+	curr := s.head
+	s.head = curr.Next
+	s.size--
+	curr.Next = nil
+	return curr.Value
+}
+
+func (s *SingleLinkedList[T]) RemoveLast() T {
+	return s.RemoveAt(s.size - 1)
 }
 
 func (s *SingleLinkedList[T]) PeekFirst() T {
