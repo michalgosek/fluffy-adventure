@@ -3,36 +3,37 @@ package priorityqueue
 import "fmt"
 
 func ExampleNewBinaryHeapInts() {
-	heap := NewBinaryHeapInts(1, 5, 1, 8, 6, 2)
+	heap := NewBinaryHeapInts(-1, 5, 1, 8, 6, 2)
 
 	fmt.Println(heap.IsMinHeap(0))
+	fmt.Println(heap.Size())
+	fmt.Println(heap.Peek())
+
 	heap.Poll()
-
-	fmt.Println(heap.Size())
 	fmt.Println(heap.IsMinHeap(0))
+	fmt.Println(heap.Size())
 	fmt.Println(heap.Peek())
-	fmt.Println(heap.Contains(8))
-	fmt.Println(heap.Contains(11))
 
-	heap.Add(-1)
-	fmt.Println(heap.Contains(-1))
+	heap.Poll()
 	fmt.Println(heap.Peek())
+
+	heap.Remove(8)
 	fmt.Println(heap.IsMinHeap(0))
 	fmt.Println(heap.Size())
 
-	heap.Clear()
-	fmt.Println(heap.Size())
+	fmt.Println(heap.Contains(6))
+	fmt.Println(heap.Contains(333))
 
 	// Output:
 	// true
-	// 5
-	// true
-	// 1
-	// true
-	// false
-	// true
+	// 6
 	// -1
 	// true
-	// 6
-	// 0
+	// 5
+	// 1
+	// 2
+	// true
+	// 3
+	// true
+	// false
 }

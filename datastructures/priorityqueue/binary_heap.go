@@ -7,8 +7,7 @@ import (
 )
 
 type BinaryHeap[T constraints.Ordered] struct {
-	heapCapacity int
-	heap         *arrays.DynamicArray[T]
+	heap *arrays.DynamicArray[T]
 }
 
 func (b *BinaryHeap[T]) swap(i, j int) {
@@ -129,6 +128,7 @@ func (b *BinaryHeap[T]) Remove(v T) bool {
 	}
 	for i := 0; i < b.Size(); i++ {
 		if v == b.heap.Get(i) {
+			b.removeAt(i)
 			return true
 		}
 	}
