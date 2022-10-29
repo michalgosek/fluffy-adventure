@@ -24,6 +24,16 @@ func (d *DynamicArray[T]) Append(v T) {
 	d.l++
 }
 
+func (d *DynamicArray[T]) CompareTo(el1, el2 T) int {
+	if el1 == el2 {
+		return 0
+	}
+	if el1 > el2 {
+		return 1
+	}
+	return -1
+}
+
 func (d *DynamicArray[T]) Clear() {
 	var empty T
 	for i := 0; i < d.l; i++ {
