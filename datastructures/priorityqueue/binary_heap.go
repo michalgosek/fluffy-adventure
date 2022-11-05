@@ -1,9 +1,11 @@
 package priorityqueue
 
 import (
+	"math"
+
+	"fluffy-adventure/cmp"
 	"fluffy-adventure/datastructures/arrays"
 	"golang.org/x/exp/constraints"
-	"math"
 )
 
 type BinaryHeap[T constraints.Ordered] struct {
@@ -21,7 +23,7 @@ func (b *BinaryHeap[T]) swap(i, j int) {
 func (b *BinaryHeap[T]) less(i, j int) bool {
 	first := b.heap.Get(i)
 	second := b.heap.Get(j)
-	return b.heap.CompareTo(first, second) <= 0
+	return cmp.Compare(first, second) <= 0
 }
 
 func (b *BinaryHeap[T]) swim(k int) {
