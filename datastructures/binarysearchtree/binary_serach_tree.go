@@ -1,7 +1,6 @@
 package binarysearchtree
 
 import (
-	"fmt"
 	"math"
 
 	"fluffy-adventure/cmp"
@@ -129,69 +128,4 @@ func (b *BinarySearchTree[T]) height(node *Node[T]) int {
 	right := float64(b.height(node.right))
 	max := int(math.Max(left, right)) + 1
 	return max
-}
-
-func (b *BinarySearchTree[T]) preOrder(node *Node[T]) {
-	if node == nil {
-		return
-	}
-	fmt.Println(node.v)
-	b.preOrder(node.left)
-	b.preOrder(node.right)
-}
-
-func (b *BinarySearchTree[T]) inOrder(node *Node[T]) {
-	if node == nil {
-		return
-	}
-	b.inOrder(node.left)
-	fmt.Println(node.v)
-	b.inOrder(node.right)
-}
-
-func (b *BinarySearchTree[T]) postOrder(node *Node[T]) {
-	if node == nil {
-		return
-	}
-	b.postOrder(node.left)
-	b.postOrder(node.right)
-	fmt.Println(node.v)
-}
-
-func (b *BinarySearchTree[T]) levelOrder(node *Node[T]) {
-	if node == nil {
-		return
-	}
-	var queue []*Node[T]
-	queue = append(queue, node)
-
-	for len(queue) != 0 {
-		dequeue := queue[0]
-		queue = queue[1:]
-
-		fmt.Println(dequeue.v)
-		if dequeue.left != nil {
-			queue = append(queue, dequeue.left)
-		}
-		if dequeue.right != nil {
-			queue = append(queue, dequeue.right)
-
-		}
-	}
-}
-
-func (b *BinarySearchTree[T]) LevelOrder() {
-	b.levelOrder(b.root)
-}
-
-func (b *BinarySearchTree[T]) PreOrder() {
-	b.preOrder(b.root)
-}
-
-func (b *BinarySearchTree[T]) InOrder() {
-	b.inOrder(b.root)
-}
-
-func (b *BinarySearchTree[T]) PostOrder() {
-	b.postOrder(b.root)
 }
