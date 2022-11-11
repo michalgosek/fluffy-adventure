@@ -114,10 +114,6 @@ To obtain this ordering we want to do a **Breadth First Search** (BFS) from the 
 To do BFS we will need to maintain a **Queue** of the nodes left to explore. 
 Begin with the root inside the queue and finish when the queue is empty. 
 
-
-
-
-
 **Complexity Analysis**:
 
 | Operation | Avg Time  | Worst |
