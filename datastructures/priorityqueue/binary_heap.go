@@ -155,14 +155,14 @@ func (b *BinaryHeap[T]) IsMinHeap(k int) bool {
 	return b.IsMinHeap(left) && b.IsMinHeap(right)
 }
 
-func NewBinaryHeapInts(nums ...int) *BinaryHeap[int] {
-	heapSize := len(nums)
+func NewBinaryHeap[T constraints.Ordered](values ...T) *BinaryHeap[T] {
+	heapSize := len(values)
 
-	b := BinaryHeap[int]{
-		heap: arrays.NewDynamicIntArray(),
+	b := BinaryHeap[T]{
+		heap: arrays.NewDynamicArray[T](),
 	}
-	for i := 0; i < len(nums); i++ {
-		b.heap.Append(nums[i])
+	for i := 0; i < len(values); i++ {
+		b.heap.Append(values[i])
 	}
 
 	// Heapify process, O(n)

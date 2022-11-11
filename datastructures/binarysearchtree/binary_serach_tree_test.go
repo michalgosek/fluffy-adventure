@@ -3,7 +3,7 @@ package binarysearchtree
 import "fmt"
 
 func ExampleBinarySearchTree() {
-	bst := NewIntBinarySearchTree()
+	bst := NewBinarySearchTree[int]()
 
 	bst.Add(7)
 	bst.Add(5)

@@ -3,7 +3,7 @@ package priorityqueue
 import "fmt"
 
 func ExampleNewBinaryHeapInts() {
-	heap := NewBinaryHeapInts(-1, 5, 1, 8, 6, 2)
+	heap := NewBinaryHeap[int](-1, 5, 1, 8, 6, 2)
 
 	fmt.Println(heap.IsMinHeap(0))
 	fmt.Println(heap.Size())

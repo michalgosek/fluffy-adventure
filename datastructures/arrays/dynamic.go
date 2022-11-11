@@ -89,7 +89,7 @@ func (d *DynamicArray[T]) Sort() {
 	slices.Sort(d.arr)
 }
 
-func NewDynamicIntArray() *DynamicArray[int] {
-	d := DynamicArray[int]{cap: 1}
+func NewDynamicArray[T constraints.Ordered]() *DynamicArray[T] {
+	d := DynamicArray[T]{cap: 1}
 	return &d
 }

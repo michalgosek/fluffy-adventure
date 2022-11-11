@@ -17,8 +17,8 @@ type BinarySearchTree[T constraints.Ordered] struct {
 	root *Node[T]
 }
 
-func NewIntBinarySearchTree() *BinarySearchTree[int] {
-	return &BinarySearchTree[int]{}
+func NewBinarySearchTree[T constraints.Ordered]() *BinarySearchTree[T] {
+	return &BinarySearchTree[T]{}
 }
 
 func (b *BinarySearchTree[T]) add(node *Node[T], v T) *Node[T] {

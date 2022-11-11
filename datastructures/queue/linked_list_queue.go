@@ -9,9 +9,9 @@ type LinkedListQueue[T constraints.Ordered] struct {
 	list linkedlist.SingleLinkedList[T]
 }
 
-func NewIntLinkedListQueue() *LinkedListQueue[int] {
-	var l linkedlist.SingleLinkedList[int]
-	return &LinkedListQueue[int]{
+func NewLinkedListQueue[T constraints.Ordered]() *LinkedListQueue[T] {
+	var l linkedlist.SingleLinkedList[T]
+	return &LinkedListQueue[T]{
 		list: l,
 	}
 }
@@ -20,7 +20,7 @@ func (l *LinkedListQueue[T]) Enqueue(v T) {
 	l.list.AddLast(v)
 }
 
-func (l *LinkedListQueue[T]) Dequeue() T {
+func (l *LinkedListQueue[T]) Dequeue() any {
 	return l.list.RemoveFirst()
 }
 
@@ -28,7 +28,7 @@ func (l *LinkedListQueue[T]) IsEmpty() bool {
 	return l.list.IsEmpty()
 }
 
-func (l *LinkedListQueue[T]) Peek() T {
+func (l *LinkedListQueue[T]) Peek() any {
 	return l.list.PeekFirst()
 }
 

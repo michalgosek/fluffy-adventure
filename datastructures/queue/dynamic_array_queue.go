@@ -9,9 +9,9 @@ type DynamicArrayQueue[T constraints.Ordered] struct {
 	arr *arrays.DynamicArray[T]
 }
 
-func NewDynamicArrayIntQueue() *DynamicArrayQueue[int] {
-	return &DynamicArrayQueue[int]{
-		arr: arrays.NewDynamicIntArray(),
+func NewDynamicArrayQueue[T constraints.Ordered]() *DynamicArrayQueue[T] {
+	return &DynamicArrayQueue[T]{
+		arr: arrays.NewDynamicArray[T](),
 	}
 }
 

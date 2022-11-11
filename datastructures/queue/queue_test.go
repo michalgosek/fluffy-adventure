@@ -3,7 +3,7 @@ package queue
 import "fmt"
 
 func ExampleLinkedListQueue() {
-	ll := NewIntLinkedListQueue()
+	ll := NewLinkedListQueue[int]()
 
 	fmt.Println(ll.Size())
 
@@ -26,7 +26,7 @@ func ExampleLinkedListQueue() {
 }
 
 func ExampleDynamicArrayQueue() {
-	ll := NewDynamicArrayIntQueue()
+	ll := NewDynamicArrayQueue[int]()
 
 	fmt.Println(ll.Size())
 

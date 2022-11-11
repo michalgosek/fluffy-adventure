@@ -1,13 +1,11 @@
 package linkedlist
 
-import "golang.org/x/exp/constraints"
-
-type Node[T constraints.Ordered] struct {
-	Value T
+type Node[T any] struct {
+	Value any
 	Next  *Node[T]
 }
 
-type SingleLinkedList[T constraints.Ordered] struct {
+type SingleLinkedList[T any] struct {
 	head *Node[T]
 	tail *Node[T]
 	size int
@@ -49,7 +47,7 @@ func (s *SingleLinkedList[T]) Contains(v T) bool {
 	return s.IndexOf(v) != -1
 }
 
-func (s *SingleLinkedList[T]) IndexOf(v T) int {
+func (s *SingleLinkedList[T]) IndexOf(v any) int {
 	if s.size == 0 {
 		panic("empty list")
 	}
@@ -79,7 +77,31 @@ func (s *SingleLinkedList[T]) Clear() bool {
 	return true
 }
 
-func (s *SingleLinkedList[T]) GetAt(idx int) T {
+func (s *SingleLinkedList[T]) Remove(v any) any {
+	if v == nil {
+		return nil
+	}
+
+	if s.head.Value == v {
+		return s.RemoveFirst()
+	}
+	if s.tail.Value == v {
+		return s.RemoveLast()
+	}
+
+	trav := s.head
+	var i int
+	for trav != nil {
+		if trav.Value == v {
+			break
+		}
+		trav = trav.Next
+		i++
+	}
+	return s.RemoveAt(i)
+}
+
+func (s *SingleLinkedList[T]) GetAt(idx int) any {
 	if idx < 0 || idx > s.size {
 		panic("illegal index")
 	}
@@ -114,7 +136,7 @@ func (s *SingleLinkedList[T]) AddAt(idx int, v T) {
 	s.size++
 }
 
-func (s *SingleLinkedList[T]) RemoveAt(idx int) T {
+func (s *SingleLinkedList[T]) RemoveAt(idx int) any {
 	if idx < 0 || idx >= s.size {
 		panic("illegal index")
 	}
@@ -144,7 +166,7 @@ func (s *SingleLinkedList[T]) setNewTail(prev *Node[T]) {
 	s.size--
 }
 
-func (s *SingleLinkedList[T]) RemoveFirst() T {
+func (s *SingleLinkedList[T]) RemoveFirst() any {
 	curr := s.head
 	s.head = curr.Next
 	s.size--
@@ -152,14 +174,14 @@ func (s *SingleLinkedList[T]) RemoveFirst() T {
 	return curr.Value
 }
 
-func (s *SingleLinkedList[T]) RemoveLast() T {
+func (s *SingleLinkedList[T]) RemoveLast() any {
 	return s.RemoveAt(s.size - 1)
 }
 
-func (s *SingleLinkedList[T]) PeekFirst() T {
+func (s *SingleLinkedList[T]) PeekFirst() any {
 	return s.head.Value
 }
 
-func (s *SingleLinkedList[T]) PeekLast() T {
+func (s *SingleLinkedList[T]) PeekLast() any {
 	return s.tail.Value
 }

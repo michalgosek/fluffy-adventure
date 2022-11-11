@@ -3,7 +3,7 @@ package binarysearchtree
 import "fmt"
 
 func ExamplePreorderTraversal() {
-	bst := NewIntBinarySearchTree()
+	bst := NewBinarySearchTree[int]()
 
 	bst.Add(11)
 	bst.Add(6)
@@ -37,11 +37,10 @@ func ExamplePreorderTraversal() {
 	// 14
 	// 17
 	// 19
-
 }
 
 func ExampleInorderTraversal() {
-	bst := NewIntBinarySearchTree()
+	bst := NewBinarySearchTree[int]()
 
 	bst.Add(11)
 	bst.Add(6)
@@ -77,7 +76,7 @@ func ExampleInorderTraversal() {
 }
 
 func ExamplePostorderTraversal() {
-	bst := NewIntBinarySearchTree()
+	bst := NewBinarySearchTree[int]()
 
 	bst.Add(11)
 	bst.Add(6)
@@ -114,7 +113,7 @@ func ExamplePostorderTraversal() {
 }
 
 func ExampleLevelOrderTraversal() {
-	bst := NewIntBinarySearchTree()
+	bst := NewBinarySearchTree[int]()
 
 	bst.Add(11)
 	bst.Add(6)

@@ -3,7 +3,7 @@ package arrays
 import "fmt"
 
 func ExampleDynamicArray_int() {
-	arr := NewDynamicIntArray()
+	arr := NewDynamicArray[int]()
 
 	fmt.Println(arr.IsEmpty())
 

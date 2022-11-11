@@ -2,7 +2,24 @@ package linkedlist
 
 import "fmt"
 
-func Example_singleLinkedList() {
+func ExampleSingleLinkedListRemove() {
+	var l SingleLinkedList[int]
+
+	l.AddAt(0, 0)
+	l.AddAt(1, 1)
+	l.AddAt(2, 2)
+	l.AddAt(3, 3)
+	l.Remove(1)
+
+	fmt.Println(l.Size())
+	fmt.Println(l.Contains(1))
+
+	// Output:
+	// 3
+	// false
+}
+
+func ExampleSingleLinkedList() {
 	var l SingleLinkedList[int]
 
 	fmt.Println(l.IsEmpty())
